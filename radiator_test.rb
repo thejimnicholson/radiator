@@ -8,8 +8,6 @@ require './radiator.rb'
 require 'test/unit'
 require 'rack/test'
 
-
-
 class RadiatorTest <  Test::Unit::TestCase
   include Rack::Test::Methods
 
