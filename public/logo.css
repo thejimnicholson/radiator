@@ -1,0 +1,71 @@
+/** radiator_logo
+ * The first commented line is your dabblet’s title
+ */
+
+body {
+padding: 0px;
+margin: 0px;
+}
+  
+div.row {
+ 
+background: #f06;
+background: linear-gradient(120deg, silver, grey);
+min-height: 50px;
+width: 3px; 
+height: 90px; 
+padding: 2px;
+margin: 2px;
+ 
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+border-radius: 8px;
+float: left;
+-webkit-box-shadow: 2px 2px 4px 1px rgba(20, 20, 20, 1);
+box-shadow: 2px 2px 4px 1px rgba(20, 20, 20, 1);
+}
+div.logo {
+color:  #404040;
+font-family: helvetica, ariel, sans-serif;
+padding-left: 10px;
+float: left;
+font-size: 18pt;
+line-height: 25pt;
+ 
+text-shadow: 2px 2px 4px rgba(20, 20, 20, .5);
+filter: dropshadow(color=rgba(20, 20, 20, .5), offx=2, offy=2);
+ 
+}
+
+div#clock {
+	font-family: helvetica, ariel, sans-serif;
+	font-size: 26pt;
+	line-height: 25pt;	
+	text-shadow: 2px 2px 4px rgba(20, 20, 20, .5);
+	filter: dropshadow(color=rgba(20, 20, 20, .5), offx=2, offy=2);
+}
+
+div.info {
+font-family: helvetica, ariel, sans-serif;
+font-size: smaller;
+color: #404040;
+margin: 5px;
+padding: 5px;
+float: right;
+}
+
+ 
+div.header {
+height: 100px;
+width: 100%;
+min-height: 100px;
+padding: 5px;
+
+background: yellow;
+background: linear-gradient(320deg, #10FEF0, #FFFFA3, #FFFFA3);
+
+min-height: 100px;
+border-bottom: 2px solid silver;
+ -webkit-box-shadow: 2px 2px 4px 1px rgba(20, 20, 20, .5);
+ box-shadow: 2px 2px 4px 1px rgba(20, 20, 20, .5);
+}

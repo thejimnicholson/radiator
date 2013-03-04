@@ -1,0 +1,6 @@
+= haml :header
+%content
+	%h1= escape_once @client.ip.inspect
+	%p
+		%pre
+			= escape_once @client.inspect
