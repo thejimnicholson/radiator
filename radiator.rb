@@ -1,6 +1,9 @@
 #/usr/bin/env ruby
 
 class Radiator < Sinatra::Base
+  helpers Sinatra::LinkHeader
+  register Sinatra::StaticAssets
+
 
   require './models.rb'
 
