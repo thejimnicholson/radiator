@@ -4,7 +4,7 @@ require 'bundler'
 Bundler.require(:default,ENV['RACK_ENV'].to_sym)
 
 class Radiator < Sinatra::Base
-
+  helpers Sinatra::ContentFor
   register Sinatra::StaticAssets
 
 

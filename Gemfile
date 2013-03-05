@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem 'thin'
 gem 'sinatra', :require => 'sinatra/base'
-gem 'sinatra-contrib', :require => 'sinatra/json'
+gem 'sinatra-contrib', :require => ['sinatra/json', 'sinatra/content_for']
 gem 'sinatra-static-assets', :require => 'sinatra/static_assets'
 gem 'haml'
 gem 'json'

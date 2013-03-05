@@ -4,4 +4,23 @@
 		= stylesheet_link_tag 'css/logo.css', 'css/cupertino/jquery-ui-1.10.1.custom.min.css'
 		= javascript_script_tag 'js/prefixfree.min.js', 'js/jquery-1.9.1.js', 'js/clock.js'
 	%body
+		%div.header
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row
+			%div.row		  
+			%div.logo
+				%h1 Radiator
+			%div.info
+				%div#clock
+					(unset)
+				= yield_content :header
 		=yield
