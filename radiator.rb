@@ -1,7 +1,10 @@
 #/usr/bin/env ruby
+require 'rubygems'
+require 'bundler'
+Bundler.require(:default,ENV['RACK_ENV'].to_sym)
 
 class Radiator < Sinatra::Base
-  helpers Sinatra::LinkHeader
+
   register Sinatra::StaticAssets
 
 
@@ -14,8 +17,8 @@ class Radiator < Sinatra::Base
   end
 
   configure :development do 
-    puts 'Development configuration in use' 
-    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db") 
+    puts 'Development configuration in use'
+    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
     DataMapper.auto_upgrade! 
   end
 
@@ -27,4 +30,11 @@ class Radiator < Sinatra::Base
     @client.save
     haml :index
   end
+
+  get '/source/:id' do
+    @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
+    @source = Source.get(params[:id])
+    haml :source
+  end
+
 end

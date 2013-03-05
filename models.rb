@@ -1,4 +1,5 @@
 require 'resolv'
+require 'open-uri'
 
 class Client
   include DataMapper::Resource
@@ -28,6 +29,19 @@ class Client
       this_one.ip = target
     end
     this_one
+  end
+
+end
+
+class Source
+  include DataMapper::Resource
+  property :id, Serial
+  property :name, String
+  property :href, URI
+  property :frequency,  Integer
+
+  def current_data
+    JSON.parse(open(href).read)
   end
 
 end
