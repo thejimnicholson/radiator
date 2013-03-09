@@ -37,11 +37,6 @@ class Radiator < Sinatra::Base
     end
   end
 
-  get '/stylesheets/:name.css' do
-    content_type 'text/css', :charset => 'utf-8'
-    scss(:"stylesheets/#{params[:name]}" ) 
-  end
-
   get '/' do
     @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
     @client.lookup_host(request.env['REMOTE_HOST']) if @client.host.nil?
@@ -53,17 +48,6 @@ class Radiator < Sinatra::Base
     @client = Client.get(params[:ip])
     @views = View.all
     haml :edit
-  end
-
-  post '/edit/:ip' do
-    haml :saved
-  end
-
-
-  get '/source/:id' do
-    @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
-    @source = Source.get(params[:id])
-    haml :source
   end
 
 end
