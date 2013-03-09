@@ -1,19 +1,18 @@
 div#header {
-	height: 100px;
+	height: 65px;
 	width: 100%;
-	min-height: 100px;
+	min-height: 65px;
 	padding: 5px;
 	background: yellow;
 	background: linear-gradient(320deg, #10FEF0, #FFFFA3, #FFFFA3);
-	min-height: 100px;
 	border-bottom: 2px solid silver;
 	box-shadow: 2px 2px 4px 1px rgba(20, 20, 20, .5);
 	div.row {
 		background: #f06;
 		background: linear-gradient(120deg, silver, gray);
-		min-height: 50px;
+		min-height: 55px;
 		width: 3px; 
-		height: 90px; 
+		height: 55px; 
 		padding: 2px;
 		margin: 2px;
 		border-radius: 8px;

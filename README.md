@@ -39,3 +39,15 @@ Radiator is being developed using TDD. Since Sinatra has no real test support (o
 * Radiator uses jquery and jquery-ui
 
 * Radiator uses [FakeWeb](http://fakeweb.rubyforge.org/) and [flexmock](https://github.com/jimweirich/flexmock) for testing.
+
+TODO
+----
+
+* merge sources into view
+
+* implement config
+
+* implement switch
+
+* need a more complementary jquery-ui theme
+

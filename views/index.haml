@@ -1,8 +1,8 @@
 - content_for :header do
 	%p
-		= @client.ip
-		|
 		= @client.host
+		|
+		= link_to 'Switch', '/switch', :class => 'button'
 #main(class='content')
 	%h1= escape_once @client.ip.inspect
 	%p

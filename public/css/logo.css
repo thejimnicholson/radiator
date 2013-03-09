@@ -1,29 +1,28 @@
 /* line 1, ../../views/stylesheets/logo.scss */
 div#header {
-  height: 100px;
+  height: 65px;
   width: 100%;
-  min-height: 100px;
+  min-height: 65px;
   padding: 5px;
   background: yellow;
   background: linear-gradient(320deg, #10fef0, #ffffa3, #ffffa3);
-  min-height: 100px;
   border-bottom: 2px solid silver;
   box-shadow: 2px 2px 4px 1px rgba(20, 20, 20, 0.5);
 }
-/* line 11, ../../views/stylesheets/logo.scss */
+/* line 10, ../../views/stylesheets/logo.scss */
 div#header div.row {
   background: #f06;
   background: linear-gradient(120deg, #c0c0c0, #808080);
-  min-height: 50px;
+  min-height: 55px;
   width: 3px;
-  height: 90px;
+  height: 55px;
   padding: 2px;
   margin: 2px;
   border-radius: 8px;
   float: left;
   box-shadow: 2px 2px 4px 1px #141414;
 }
-/* line 23, ../../views/stylesheets/logo.scss */
+/* line 22, ../../views/stylesheets/logo.scss */
 div#header div#logo {
   color: #404040;
   font-family: helvetica, ariel, sans-serif;
@@ -34,7 +33,7 @@ div#header div#logo {
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.5);
   filter: dropshadow(color=rgba(20, 20, 20, 0.5), offx=2, offy=2);
 }
-/* line 33, ../../views/stylesheets/logo.scss */
+/* line 32, ../../views/stylesheets/logo.scss */
 div#header div#info {
   font-family: helvetica, ariel, sans-serif;
   font-size: smaller;
@@ -43,7 +42,7 @@ div#header div#info {
   padding: 5px;
   float: right;
 }
-/* line 40, ../../views/stylesheets/logo.scss */
+/* line 39, ../../views/stylesheets/logo.scss */
 div#header div#info div#clock {
   font-family: helvetica, ariel, sans-serif;
   font-size: 26pt;

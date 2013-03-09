@@ -57,7 +57,7 @@ a img {
   border: none;
 }
 
-/* line 20, ../../views/styleshees/screen.scss */
+/* line 20, ../../views/stylesheets/screen.scss */
 body.bp {
   line-height: 1.5;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -492,14 +492,14 @@ form.bp form.inline p {
   margin-bottom: 0;
 }
 
-/* line 37, ../../views/styleshees/screen.scss */
+/* line 37, ../../views/stylesheets/screen.scss */
 body.two-col #container {
   width: 950px;
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 40, ../../views/styleshees/screen.scss */
+/* line 40, ../../views/stylesheets/screen.scss */
 body.two-col #header, body.two-col #footer {
   display: inline;
   float: left;
@@ -510,7 +510,7 @@ body.two-col #header, body.two-col #footer {
 * html body.two-col #header, * html body.two-col #footer {
   overflow-x: hidden;
 }
-/* line 43, ../../views/styleshees/screen.scss */
+/* line 43, ../../views/stylesheets/screen.scss */
 body.two-col #sidebar {
   display: inline;
   float: left;
@@ -521,7 +521,7 @@ body.two-col #sidebar {
 * html body.two-col #sidebar {
   overflow-x: hidden;
 }
-/* line 48, ../../views/styleshees/screen.scss */
+/* line 48, ../../views/stylesheets/screen.scss */
 body.two-col #content {
   display: inline;
   float: left;
