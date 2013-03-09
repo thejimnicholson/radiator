@@ -33,6 +33,7 @@ class RadiatorTest <  Test::Unit::TestCase
   end
 
   def test_client_lookup_host_no_value
+    flexmock(Resolv).new_instances.should_receive(:getname => 'localhost')
     assert_equal('localhost',@client.lookup_host(nil),'should be localhost')
   end
 
