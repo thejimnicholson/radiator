@@ -1,6 +1,5 @@
 source "https://rubygems.org"
 
-gem 'thin', :require => false
 gem 'compass'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'sinatra-contrib', :require => ['sinatra/json', 'sinatra/content_for','sinatra/reloader']
