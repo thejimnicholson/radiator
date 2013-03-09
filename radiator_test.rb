@@ -42,6 +42,15 @@ class RadiatorTest <  Test::Unit::TestCase
     assert_equal('somevalue',@client.lookup_host('somevalue'),'should be somevalue')
   end
 
+  def test_source_current_data
+    FakeWeb.register_uri(:get, "http://127.0.0.1:9999/foo", :body => JSON::dump({:heres => "some json"}))
+    source = Source.new(:name => 'test', :href=> 'http://127.0.0.1:9999/foo',:frequency => 1)
+
+    assert_nothing_raised do 
+      assert_equal({'heres' => "some json"},source.current_data, "Something amiss: #{source.current_data.inspect}")
+    end
+  end
+
 
   def client_for_tests
     client = Client.create(:location => 'test')
