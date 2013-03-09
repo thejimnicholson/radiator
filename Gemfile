@@ -1,8 +1,9 @@
 source "https://rubygems.org"
 
-gem 'thin'
+gem 'thin', :require => false
+gem 'compass'
 gem 'sinatra', :require => 'sinatra/base'
-gem 'sinatra-contrib', :require => ['sinatra/json', 'sinatra/content_for']
+gem 'sinatra-contrib', :require => ['sinatra/json', 'sinatra/content_for','sinatra/reloader']
 gem 'sinatra-static-assets', :require => 'sinatra/static_assets'
 gem 'haml'
 gem 'json'

@@ -1,7 +1,7 @@
 #/usr/bin/env ruby
 require 'rubygems'
 require 'bundler'
-Bundler.require(:default,ENV['RACK_ENV'].to_sym)
+Bundler.require(:default,(ENV['RACK_ENV']||'development').to_sym)
 
 class Radiator < Sinatra::Base
   helpers Sinatra::ContentFor
@@ -18,11 +18,29 @@ class Radiator < Sinatra::Base
 
   configure :development do 
     puts 'Development configuration in use'
+    register Sinatra::Reloader
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
-    DataMapper.auto_upgrade! 
+    DataMapper.auto_upgrade!
   end
 
-  set :haml, :format => :html5
+  configure do
+    set :haml, {:format => :html5, :escape_html => false}
+    set :scss, {:style => :compact, :debug_info => false}
+    Compass.add_project_configuration(File.join(Dir.pwd, 'compass.rb'))
+  end
+
+  helpers do
+    def options_helper(values,selected)
+      values.collect  do |v|
+        haml_tag :option, v.title, :value => v.id, :selected => selected.any? {|x| x.id == v.id}
+      end
+    end
+  end
+
+  get '/stylesheets/:name.css' do
+    content_type 'text/css', :charset => 'utf-8'
+    scss(:"stylesheets/#{params[:name]}" ) 
+  end
 
   get '/' do
     @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
@@ -30,6 +48,17 @@ class Radiator < Sinatra::Base
     @client.save
     haml :index
   end
+
+  get '/edit/:ip' do
+    @client = Client.get(params[:ip])
+    @views = View.all
+    haml :edit
+  end
+
+  post '/edit/:ip' do
+    haml :saved
+  end
+
 
   get '/source/:id' do
     @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])

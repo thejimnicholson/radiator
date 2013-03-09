@@ -6,6 +6,7 @@ class Client
   property :ip, IPAddress, :key => true
   property :host, String
   property :location, String
+  has n, :views
 
   def lookup_host(name)
     return self.host unless host.nil?
@@ -39,11 +40,20 @@ class Source
   property :name, String
   property :href, URI
   property :frequency,  Integer
-
+  has n, :views, :through => Resource
   def current_data
     JSON.parse(open(href).read)
   end
 
 end
+
+class View
+  include DataMapper::Resource
+  property :id, Serial
+  property :title, String
+  belongs_to :client
+  has n, :sources , :through => Resource
+end
+
 
 DataMapper.finalize
