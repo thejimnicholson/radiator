@@ -1,6 +1,8 @@
 Radiator
 ========
 
+[![Build Status](https://travis-ci.org/thejimnicholson/radiator.png)](https://travis-ci.org/thejimnicholson/radiator)
+
 Radiator is a system for syndicating and displaying continuous integration server job statuses. It currently can act as a front-end to [Jenkins](http://jenkins-ci.org/)
 
 The Why of Radiator
