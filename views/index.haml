@@ -3,8 +3,13 @@
 		= @client.host
 		|
 		= link_to 'Switch', '/switch', :class => 'button'
-#main(class='content')
-	%h1= escape_once @client.ip.inspect
-	%p
-		%pre
-			= escape_once @client.inspect
+%div#main
+	- @client.views.each do |view|
+		%div.view
+			%h2
+				= view.title
+			%div.jobs
+				- view.sources.collect {|s| s.current_data['jobs']}.flatten.each do |job|
+					%div(class="job #{job['color']}")
+						%p
+							= link_to job['name'], job['url']

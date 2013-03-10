@@ -29,11 +29,14 @@ div#header div#logo {
   padding-left: 10px;
   float: left;
   font-size: 18pt;
-  line-height: 30pt;
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.5);
   filter: dropshadow(color=rgba(20, 20, 20, 0.5), offx=2, offy=2);
 }
-/* line 32, ../../views/stylesheets/logo.scss */
+/* line 30, ../../views/stylesheets/logo.scss */
+div#header div#logo h1 {
+  margin-bottom: 0;
+}
+/* line 34, ../../views/stylesheets/logo.scss */
 div#header div#info {
   font-family: helvetica, ariel, sans-serif;
   font-size: smaller;
@@ -42,11 +45,21 @@ div#header div#info {
   padding: 5px;
   float: right;
 }
-/* line 39, ../../views/stylesheets/logo.scss */
+/* line 41, ../../views/stylesheets/logo.scss */
 div#header div#info div#clock {
   font-family: helvetica, ariel, sans-serif;
   font-size: 26pt;
   line-height: 25pt;
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.5);
   filter: dropshadow(color=rgba(20, 20, 20, 0.5), offx=2, offy=2);
+}
+
+/* line 50, ../../views/stylesheets/logo.scss */
+div#edit {
+  display: hidden;
+}
+
+/* line 53, ../../views/stylesheets/logo.scss */
+div#content {
+  clear: both;
 }

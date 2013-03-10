@@ -25,9 +25,11 @@ div#header {
 		padding-left: 10px;
 		float: left;
 		font-size: 18pt;
-		line-height: 30pt;
 		text-shadow: 2px 2px 4px rgba(20, 20, 20, .5);
 		filter: dropshadow(color=rgba(20, 20, 20, .5), offx=2, offy=2);
+		h1 {
+			margin-bottom: 0;
+		}
 	}
 	div#info {
 		font-family: helvetica, ariel, sans-serif;
@@ -44,4 +46,10 @@ div#header {
 			filter: dropshadow(color=rgba(20, 20, 20, .5), offx=2, offy=2);
 		}
 	}
+}
+div#edit {
+	display: hidden;
+}
+div#content {
+	clear: both;
 }
