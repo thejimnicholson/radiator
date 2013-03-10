@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 ENV['RACK_ENV'] = 'test'
 require './radiator.rb'
 
