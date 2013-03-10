@@ -47,12 +47,25 @@ class RadiatorTest <  Test::Unit::TestCase
   def test_source_current_data
     FakeWeb.register_uri(:get, "http://127.0.0.1:9999/foo", :body => JSON::dump({:heres => "some json"}))
     source = Source.new(:name => 'test', :href=> 'http://127.0.0.1:9999/foo',:frequency => 1)
-
     assert_nothing_raised do 
       assert_equal({'heres' => "some json"},source.current_data, "Something amiss: #{source.current_data.inspect}")
     end
   end
 
+  def test_view_jobs
+    FakeWeb.register_uri(:get, "http://127.0.0.1:9999/foo", :body => JSON::dump({"jobs"=>[{"color"=>"red", "url"=>"http://localhost:8080/job/failjob/", "name"=>"failjob"}]}))
+    source1 = Source.new(:name => 'test', :href=> 'http://127.0.0.1:9999/foo', :frequency => 1)
+    source1.save
+    FakeWeb.register_uri(:get, "http://127.0.0.1:9998/bar", :body => JSON::dump({"jobs"=>[{"color"=>"blue", "url"=>"http://localhost:8080/job/goodjob/", "name"=>"goodjob"}]}))
+    source2 = Source.new(:name => 'test2', :href=> 'http://127.0.0.1:9998/bar',:frequency => 1)
+    source2.save
+    view = View.new(:title => 'A view')
+    view.sources << source1
+    view.sources << source2
+    view.save!
+    assert view.sources.length == 2
+    assert view.jobs.length == 2
+  end
 
   def client_for_tests
     client = Client.create(:location => 'test')

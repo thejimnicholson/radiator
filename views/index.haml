@@ -9,7 +9,7 @@
 			%h2
 				= view.title
 			%div.jobs
-				- view.sources.collect {|s| s.current_data['jobs']}.flatten.each do |job|
-					%div(class="job #{job['color']}")
+				- view.jobs.each do |job|
+					%div(class="job #{job['color']} ui-corner-all ui-widget")
 						%p
 							= link_to job['name'], job['url']

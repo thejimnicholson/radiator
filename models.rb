@@ -53,6 +53,10 @@ class View
   property :title, String
   belongs_to :client
   has n, :sources , :through => Resource
+
+  def jobs
+    sources.collect {|s| s.current_data['jobs']}.flatten
+  end
 end
 
 

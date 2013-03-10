@@ -1,17 +1,35 @@
-div.view {
-	width: 100%;
-	div.jobs {
-		column-count: 4;
-		div.job {
-			display: inline-block;
-			border: 1px solid black;
-			width: 100%;
-			margin: 1px;
-			font-size: 18px;
-		}
-		div.job.red {
-			
-			background-color: red;
+div#main {
+	padding: 0;
+	margin: 0;
+	div.view {
+		padding: 0;
+		margin: 0;
+		div.jobs {
+			column-count: 4;
+			column-gap: 0;
+			column-span: 1;
+			column-width: 100%;
+			padding: 0;
+			margin: 0;
+			div.job {
+				width: 95%;
+				display: inline-block;
+				font-size: 18px;
+				padding: 0;
+				margin: 5px;
+				p {
+					margin: 5px;
+				}
+			}
+			div.job.red {
+				background-color: red;
+				p {
+					a {
+						text-decoration: none;
+						color: white;
+					}
+				}
+			}
 		}
 	}
 }
