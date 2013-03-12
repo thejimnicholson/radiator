@@ -3,13 +3,4 @@
 		= @client.host
 		|
 		= link_to 'Switch', '/switch', :class => 'button'
-%div#main
-	- @client.views.each do |view|
-		%div.view
-			%h2
-				= view.title
-			%div.jobs
-				- view.jobs.each do |job|
-					%div(class="job #{job['color']} ui-corner-all ui-widget")
-						%p
-							= link_to job['name'], job['url']
+= haml :views

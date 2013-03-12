@@ -35,6 +35,14 @@ class Radiator < Sinatra::Base
         haml_tag :option, v.title, :value => v.id, :selected => selected.any? {|x| x.id == v.id}
       end
     end
+
+    def status_image(color)
+      if color =~ /anime/
+        image_tag %Q(images/#{color}.gif)
+      else
+        image_tag %Q(images/#{color}.png)
+      end
+    end
   end
 
   get '/' do
@@ -44,10 +52,17 @@ class Radiator < Sinatra::Base
     haml :index
   end
 
+  get '/views' do
+     @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
+    haml :views, :layout => false
+   end
+
   get '/edit/:ip' do
     @client = Client.get(params[:ip])
     @views = View.all
     haml :edit
   end
+
+
 
 end
