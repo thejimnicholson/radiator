@@ -15,4 +15,5 @@ group :test do
 	gem 'rack-test', :require => 'rack/test'
 	gem 'flexmock', :require =>  'flexmock/test_unit'
 	gem 'fakeweb', :require => 'fakeweb'
+	gem 'nokogiri', :require => 'nokogiri'
 end

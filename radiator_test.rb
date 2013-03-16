@@ -31,6 +31,15 @@ class RadiatorTest <  Test::Unit::TestCase
     assert !Client.get('127.0.0.2').nil?, 'Should have created a record'
   end
 
+  def test_get_views
+    get '/views',{}
+    assert last_response.ok?
+    body = Nokogiri::HTML(last_response.body)
+    assert_equal(2,body.css('div.job').length,'should have two jobs')
+    assert(body.css('div.job.red').text =~ /failjob/, 'failjob should render red')
+    assert(body.css('div.job.blue').text =~ /goodjob/, 'goodjob should render blue')
+  end
+
   def test_client_find_or_create_by_ip_for_new
     client = Client.find_or_create_by_ip('127.0.0.2')
     client.save!
