@@ -45,11 +45,8 @@ div#header {
 			text-shadow: 2px 2px 4px rgba(20, 20, 20, .5);
 			filter: dropshadow(color=rgba(20, 20, 20, .5), offx=2, offy=2);
 		}
+		a {
+			color: white;
+		}
 	}
-}
-div#edit {
-	display: hidden;
-}
-div#content {
-	clear: both;
 }

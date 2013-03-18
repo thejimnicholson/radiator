@@ -5,7 +5,7 @@
 				= view.title
 			%div.jobs
 				- view.jobs.each do |job|
-					%div(class="job #{job['color']} ui-corner-all ui-widget")
+					%div(class="job #{job['color']}")
 						%p
 							= status_image job['color']
 							= link_to job['name'], job['url']

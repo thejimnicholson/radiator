@@ -34,10 +34,19 @@ class RadiatorTest <  Test::Unit::TestCase
   def test_get_views
     get '/views',{}
     assert last_response.ok?
-    body = Nokogiri::HTML(last_response.body)
-    assert_equal(2,body.css('div.job').length,'should have two jobs')
-    assert(body.css('div.job.red').text =~ /failjob/, 'failjob should render red')
-    assert(body.css('div.job.blue').text =~ /goodjob/, 'goodjob should render blue')
+    parsing(last_response.body) do |html|
+      assert_equal(2,html.css('div.job').length,'should have two jobs')
+      assert(html.css('div.job.red').text =~ /failjob/, 'failjob should render red')
+      assert(html.css('div.job.blue').text =~ /goodjob/, 'goodjob should render blue')
+    end
+  end
+
+  def test_get_views_list
+    get '/views_list', {}
+    assert last_response.ok?
+    parsing(last_response.body) do |html|
+      assert_equal(1,html.css('option').length,'Should have one view')
+    end
   end
 
   def test_client_find_or_create_by_ip_for_new
@@ -90,6 +99,11 @@ class RadiatorTest <  Test::Unit::TestCase
     client.views << view
     client.save!
     client
+  end
+
+  def parsing(body,&block)
+    tree = Nokogiri::HTML(body)
+    yield tree
   end
 
 end

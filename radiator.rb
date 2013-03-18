@@ -53,9 +53,14 @@ class Radiator < Sinatra::Base
   end
 
   get '/views' do
-     @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
+    @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
     haml :views, :layout => false
-   end
+  end
+
+  get '/views_list' do
+    @views = View.all
+    haml :views_list, :layout => false
+  end
 
   get '/edit/:ip' do
     @client = Client.get(params[:ip])

@@ -53,13 +53,7 @@ div#header div#info div#clock {
   text-shadow: 2px 2px 4px rgba(20, 20, 20, 0.5);
   filter: dropshadow(color=rgba(20, 20, 20, 0.5), offx=2, offy=2);
 }
-
-/* line 50, ../../views/stylesheets/logo.scss */
-div#edit {
-  display: hidden;
-}
-
-/* line 53, ../../views/stylesheets/logo.scss */
-div#content {
-  clear: both;
+/* line 48, ../../views/stylesheets/logo.scss */
+div#header div#info a {
+  color: white;
 }

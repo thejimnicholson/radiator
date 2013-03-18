@@ -1,3 +1,17 @@
+div#edit {
+	form {
+		label {
+			float: left;
+			 margin-right: 5px;
+		}
+		select {
+			float: left;
+			margin-right: 5px;
+		}
+	}
+}
+
+
 div#main {
 	padding: 0;
 	margin: 0;
@@ -27,11 +41,10 @@ div#main {
 				}
 			}
 			div.job.red {
-				background-color: red;
 				p {
 					a {
 						text-decoration: none;
-						color: white;
+						color: red;
 					}
 				}
 			}
