@@ -2,11 +2,7 @@
 	%p
 		= @client.host
 		|
-		= link_to 'Configure', '#', :id => 'configure', :class => 'button'
-%div#edit(title = 'Edit display')
-	%form(method='post')
-		%label(for='views')Choose views: 
-		%select(name='views' id='views' multiple)
-		= link_to 'Create a view', "/views/add/#{@client.ip}", :class => 'button'
-		%input(type='submit' value="Configure" class="button")
-= haml :views
+		= link_to 'Configure', '#', :id => 'configuration', :class => 'button'
+%div#edit(title = 'Configure display')
+%div#main
+	= haml :views

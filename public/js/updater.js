@@ -6,16 +6,17 @@ $(document).ready(function() {
 	update_views(); 
 	$('.button').button();
 	$('#edit').hide();
-	$('#configure').click(function() {
-		$('#edit').dialog();
+	$('#configuration').click(function(e) {
+		e.preventDefault();
+		e.stopPropagation(); 
+		$('#edit').dialog({modal: true});
 		$('#edit').show();
-		$.get('/views_list',function(data){
-			$('#views').html(data);
-			$('#views').width($('#edit form').width() - $('#edit label').width() - 15);
+		$.get('/configure',function(data){
+			$('#edit').html(data);
 		},'html');
 		
 	})
-	});
+});
 
 
 
@@ -25,9 +26,4 @@ function update_views() {
             window.setTimeout(update_views, 60000);
           },
           'html');
-}
-
-function show_edit_dialog() {
-	$('#edit').dialog();
-	$('#edit').show();	
 }

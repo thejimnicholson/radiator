@@ -1,12 +1,14 @@
 div#edit {
 	form {
-		label {
-			float: left;
-			 margin-right: 5px;
-		}
-		select {
-			float: left;
-			margin-right: 5px;
+		fieldset {
+			border: 1px gray solid;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+			legend {
+				margin-left: 10px;
+				font-weight: bold;
+			}
 		}
 	}
 }

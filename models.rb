@@ -6,7 +6,7 @@ class Client
   property :ip, IPAddress, :key => true
   property :host, String
   property :location, String
-  has n, :views
+  has 1, :view
 
   def lookup_host(name)
     return self.host unless host.nil?
@@ -28,6 +28,7 @@ class Client
     if  this_one.nil?
       this_one = self.create()
       this_one.ip = target
+      this_one.view = View.new
     end
     this_one
   end

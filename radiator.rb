@@ -36,6 +36,13 @@ class Radiator < Sinatra::Base
       end
     end
 
+    def source_selection(values, selected)
+      values.collect do |v|
+        haml_tag :input, :type => 'checkbox', :checked => (selected.collect {|s| s.id}.include? v.id), :class => 'source_list', :name => "source[#{v.id}]", :id => "source_#{v.id}", :value => v.id
+        haml_tag :label, v.name, :for => "source_#{v.id}"
+      end
+    end
+
     def status_image(color)
       if color =~ /anime/
         image_tag %Q(images/#{color}.gif)
@@ -53,19 +60,14 @@ class Radiator < Sinatra::Base
   end
 
   get '/views' do
-    @client = Client.find_or_create_by_ip(request.env['REMOTE_ADDR'])
+    @client = Client.get(request.env['REMOTE_ADDR'])
     haml :views, :layout => false
   end
 
-  get '/views_list' do
-    @views = View.all
-    haml :views_list, :layout => false
-  end
-
-  get '/edit/:ip' do
-    @client = Client.get(params[:ip])
-    @views = View.all
-    haml :edit
+  get '/configure' do
+    @client = Client.get(request.env['REMOTE_ADDR'])
+    @sources = Source.all
+    haml :configure, :layout => false
   end
 
 

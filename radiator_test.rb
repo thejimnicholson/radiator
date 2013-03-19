@@ -41,11 +41,11 @@ class RadiatorTest <  Test::Unit::TestCase
     end
   end
 
-  def test_get_views_list
-    get '/views_list', {}
+  def test_get_configure
+    get '/configure', {}
     assert last_response.ok?
     parsing(last_response.body) do |html|
-      assert_equal(1,html.css('option').length,'Should have one view')
+      assert_equal(2,html.css('#sources input').length,'Should have two view')
     end
   end
 
@@ -81,7 +81,7 @@ class RadiatorTest <  Test::Unit::TestCase
   end
 
   def test_view_jobs
-    assert @client.views.first.jobs.length == 2
+    assert @client.view.jobs.length == 2
   end
 
   def client_for_tests
@@ -96,7 +96,7 @@ class RadiatorTest <  Test::Unit::TestCase
     view.sources << source1
     view.sources << source2
     view.save!
-    client.views << view
+    client.view = view
     client.save!
     client
   end
