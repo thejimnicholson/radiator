@@ -13,6 +13,8 @@ $(document).ready(function() {
 		$('#edit').show();
 		$.get('/configure',function(data){
 			$('#edit').html(data);
+			$('.button').button();
+			$('input[type=checkbox]').prettyCheckboxes();
 		},'html');
 		
 	})
@@ -26,4 +28,5 @@ function update_views() {
             window.setTimeout(update_views, 60000);
           },
           'html');
+
 }

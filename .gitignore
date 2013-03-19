@@ -1,4 +1,8 @@
 jquery-ui-1.10.1.custom
-public/css/*
+public/css/ie.css
+public/css/logo.css
+public/css/print.css
+public/css/screen.css
+public/css/view.css
 .sass-cache
 *~

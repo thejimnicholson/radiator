@@ -11,18 +11,18 @@
 			%input{:type => 'checkbox', :id => 'filter_active', :name => 'filter_active', :value => 'true'}
 			%label{:for => 'filter_active'}
 				Active Jobs
-		%p
 			%input{:type => 'checkbox', :id => 'filter_disabled', :name => 'filter_disabled', :value => 'true'}
 			%label{:for => 'filter_disabled'}
 				Disabled Jobs
-		%p
 			%input{:type => 'checkbox', :id => 'filter_failed', :name => 'filter_failed', :value => 'true'}
 			%label{:for => 'filter_failed'}
 				Failing Jobs
-		%p
 			%input{:type => 'checkbox', :id => 'filter_succeeded', :name => 'filter_succeeded', :value => 'true'}
 			%label{:for => 'filter_succeeded'}
-				Successful Jobs			
+				Successful Jobs
+			%input{:type => 'checkbox', :id => 'filter_unstable', :name => 'filter_unstable', :value => 'true'}
+			%label{:for => 'filter_unstable'}
+				Unstable Jobs					
 	%fieldset(id='sort')
 		%legend Sort
 	%input(type='submit' value="Configure" class="button")

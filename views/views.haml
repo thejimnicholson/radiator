@@ -1,6 +1,4 @@
 %div.view
-	%h2
-		= @client.view.title
 	%div.jobs
 		- @client.view.jobs.each do |job|
 			%div(class="job #{job['color']}")
