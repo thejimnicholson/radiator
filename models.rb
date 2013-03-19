@@ -52,11 +52,29 @@ class View
   include DataMapper::Resource
   property :id, Serial
   property :title, String
+  property :filter_aborted, Boolean
+  property :filter_active, Boolean
+  property :filter_disabled, Boolean
+  property :filter_failed, Boolean
+  property :filter_succeeded, Boolean
+  property :filter_unstable, Boolean
   belongs_to :client
   has n, :sources , :through => Resource
 
   def jobs
-    sources.collect {|s| s.current_data['jobs']}.flatten
+    all_jobs = sources.collect {|s| s.current_data['jobs']}.flatten
+    all_jobs.select {|job| filters.any? {|filter| filter.match(job['color'])}}
+  end
+
+  def filters
+    f = []
+    f << /aborted/ if filter_aborted
+    f << /.*_anime/ if filter_active
+    f << /disabled/ if filter_disabled
+    f << /red/ if filter_failed
+    f << /blue/ if filter_succeeded
+    f << /yellow/ if filter_unstable
+    f
   end
 end
 

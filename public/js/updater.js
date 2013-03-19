@@ -25,6 +25,7 @@ $(document).ready(function() {
 function update_views() {
 	$.get("/views",function(data) {
             $("#main").html(data);
+			// $('.job p a').marquee();
             window.setTimeout(update_views, 60000);
           },
           'html');

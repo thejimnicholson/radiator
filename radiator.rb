@@ -30,10 +30,10 @@ class Radiator < Sinatra::Base
   end
 
   helpers do
-    def options_helper(values,selected)
-      values.collect  do |v|
-        haml_tag :option, v.title, :value => v.id, :selected => selected.any? {|x| x.id == v.id}
-      end
+
+    def checkbox_helper(id,css,value,text)
+      haml_tag :input, :type => 'checkbox', :checked => value, :class => css, :name => id, :id => id, :value => true
+      haml_tag :label, text, :for => id
     end
 
     def source_selection(values, selected)

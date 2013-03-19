@@ -3,26 +3,15 @@
 		%legend Select sources
 		%p
 			- source_selection(@sources,@client.view.sources)
-		%p
-			= link_to "Add a source", '#'
 	%fieldset(id='filters')
 		%legend Filters
 		%p
-			%input{:type => 'checkbox', :id => 'filter_active', :name => 'filter_active', :value => 'true'}
-			%label{:for => 'filter_active'}
-				Active Jobs
-			%input{:type => 'checkbox', :id => 'filter_disabled', :name => 'filter_disabled', :value => 'true'}
-			%label{:for => 'filter_disabled'}
-				Disabled Jobs
-			%input{:type => 'checkbox', :id => 'filter_failed', :name => 'filter_failed', :value => 'true'}
-			%label{:for => 'filter_failed'}
-				Failing Jobs
-			%input{:type => 'checkbox', :id => 'filter_succeeded', :name => 'filter_succeeded', :value => 'true'}
-			%label{:for => 'filter_succeeded'}
-				Successful Jobs
-			%input{:type => 'checkbox', :id => 'filter_unstable', :name => 'filter_unstable', :value => 'true'}
-			%label{:for => 'filter_unstable'}
-				Unstable Jobs					
+			- checkbox_helper('filter_aborted','filter',@client.view.filter_aborted,'Aborted Jobs')
+			- checkbox_helper('filter_active','filter',@client.view.filter_active,'Active Jobs')
+			- checkbox_helper('filter_disabled','filter',@client.view.filter_disabled,'Disabled Jobs')
+			- checkbox_helper('filter_failed','filter',@client.view.filter_failed,'Failing Jobs')
+			- checkbox_helper('filter_succeeded','filter',@client.view.filter_succeeded,'Successful Jobs')
+			- checkbox_helper('filter_unstable','filter',@client.view.filter_unstable,'Unstable Jobs')
 	%fieldset(id='sort')
 		%legend Sort
 	%input(type='submit' value="Configure" class="button")

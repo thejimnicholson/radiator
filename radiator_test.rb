@@ -84,8 +84,16 @@ class RadiatorTest <  Test::Unit::TestCase
     assert @client.view.jobs.length == 2
   end
 
+  def test_view_jobs_filter_add
+    @client.view.filter_unstable = true
+    assert @client.view.jobs.length == 3
+  end
+
   def client_for_tests
-    FakeWeb.register_uri(:get, "http://127.0.0.1:9999/foo", :body => JSON::dump({"jobs"=>[{"color"=>"red", "url"=>"http://localhost:8080/job/failjob/", "name"=>"failjob"}]}))
+    FakeWeb.register_uri(:get, "http://127.0.0.1:9999/foo", :body => JSON::dump(
+        {"jobs"=>[{"color"=>"red", "url"=>"http://localhost:8080/job/failjob/", "name"=>"failjob"},
+          {"color"=>"yellow", "url"=>"http://localhost:8080/job/unstablejob/", "name"=>"unstablejob"}
+          ]}))
     FakeWeb.register_uri(:get, "http://127.0.0.1:9998/bar", :body => JSON::dump({"jobs"=>[{"color"=>"blue", "url"=>"http://localhost:8080/job/goodjob/", "name"=>"goodjob"}]}))
     client = Client.create(:location => 'test')
     client.ip = '127.0.0.1'
@@ -95,6 +103,8 @@ class RadiatorTest <  Test::Unit::TestCase
     view = View.create(:title => 'A view')
     view.sources << source1
     view.sources << source2
+    view.filter_failed = true
+    view.filter_succeeded = true
     view.save!
     client.view = view
     client.save!
