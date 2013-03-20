@@ -49,6 +49,11 @@ class RadiatorTest <  Test::Unit::TestCase
     end
   end
 
+  def test_post_configure
+    post '/configure', {'source' => [@client.view.sources.first.id],'filter' => ['filter_failed']}
+    assert last_response.redirect '/'
+  end
+
   def test_client_find_or_create_by_ip_for_new
     client = Client.find_or_create_by_ip('127.0.0.2')
     client.save!

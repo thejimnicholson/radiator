@@ -32,13 +32,13 @@ class Radiator < Sinatra::Base
   helpers do
 
     def checkbox_helper(id,css,value,text)
-      haml_tag :input, :type => 'checkbox', :checked => value, :class => css, :name => id, :id => id, :value => true
+      haml_tag :input, :type => 'checkbox', :checked => value, :class => css, :name => %Q(#{css}[]), :id => id, :value => id
       haml_tag :label, text, :for => id
     end
 
     def source_selection(values, selected)
       values.collect do |v|
-        haml_tag :input, :type => 'checkbox', :checked => (selected.collect {|s| s.id}.include? v.id), :class => 'source_list', :name => "source[#{v.id}]", :id => "source_#{v.id}", :value => v.id
+        haml_tag :input, :type => 'checkbox', :checked => (selected.collect {|s| s.id}.include? v.id), :class => 'source_list', :name => "source[]", :id => "source_#{v.id}", :value => v.id
         haml_tag :label, v.name, :for => "source_#{v.id}"
       end
     end
@@ -68,6 +68,20 @@ class Radiator < Sinatra::Base
     @client = Client.get(request.env['REMOTE_ADDR'])
     @sources = Source.all
     haml :configure, :layout => false
+  end
+
+  post '/configure' do
+    @client = Client.get(request.env['REMOTE_ADDR'])
+    @client.view.sources = []
+    params['source'].each do |sid|
+      @client.view.sources << Source.get(sid)
+    end
+    @client.view.reset_filters
+    params['filter'].each do |f|
+      @client.view.send(%Q(#{f}=).to_sym,true)
+    end
+    @client.view.save!
+    redirect '/',303
   end
 
 

@@ -76,6 +76,13 @@ class View
     f << /yellow/ if filter_unstable
     f
   end
+
+  def reset_filters
+    [:filter_aborted=,:filter_active=,:filter_disabled=,:filter_failed=,:filter_succeeded=,:filter_unstable=].each do |f|
+      self.send(f,nil)
+    end
+    self
+  end
 end
 
 
