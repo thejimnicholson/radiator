@@ -84,6 +84,10 @@ class Radiator < Sinatra::Base
     redirect '/',303
   end
 
-
+  get '/admin' do
+    @clients = Client.all
+    @sources = Source.all
+    haml :admin
+  end
 
 end

@@ -4,7 +4,7 @@
 		%p
 			- source_selection(@sources,@client.view.sources)
 	%fieldset(id='filters')
-		%legend Filters
+		%legend Include
 		%p
 			- checkbox_helper('filter_aborted','filter',@client.view.filter_aborted,'Aborted Jobs')
 			- checkbox_helper('filter_active','filter',@client.view.filter_active,'Active Jobs')

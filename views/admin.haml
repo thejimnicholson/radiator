@@ -1,0 +1,23 @@
+%div#admin(title = "Administration")
+	%div.inner
+		%ul#admin_tabs
+			%li
+				%a(href = "#clients")
+					Clients
+			%li
+				%a(href = "#sources")
+					Sources
+		%div#clients
+			%h2 Clients
+			%div.list
+				- @clients.each do |client|
+					%p
+						= client.host
+						= client.ip.to_s
+						= client.location || "(No location set)"
+		%div#sources
+			%h2 Sources
+			- @sources.each do |source|
+				%p
+					= source.name
+					= source.href.to_s

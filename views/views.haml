@@ -1,8 +1,7 @@
 %div.view
-	%div.jobs
-		- @client.view.jobs.each do |job|
-			%div(class="job #{job['color']}")
-				%p
-					= status_image job['color']
-					= link_to job['name'], job['url']
+	- @client.view.jobs.each do |job|
+		%div(class="job #{job['color']}")
+			%p
+				= status_image job['color']
+				= link_to job['name'], job['url']
 		
