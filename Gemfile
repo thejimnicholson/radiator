@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
 gem 'compass'
-gem 'sinatra', :require => 'sinatra/base'
-gem 'sinatra-contrib', :require => ['sinatra/json', 'sinatra/content_for','sinatra/reloader']
+gem 'sinatra', :require => 'sinatra/base', git: 'https://github.com/juanpastas/sinatra.git'
+gem 'sinatra-contrib', :require => ['sinatra/json', 'sinatra/content_for','sinatra/reloader'], git: 'https://github.com/sinatra/sinatra-contrib.git'
 gem 'sinatra-static-assets', :require => 'sinatra/static_assets'
 gem 'haml'
 gem 'json'
