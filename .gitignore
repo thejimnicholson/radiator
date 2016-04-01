@@ -7,3 +7,4 @@ public/css/view.css
 .sass-cache
 *~
 compass_app_log.txt
+Gemfile.lock
