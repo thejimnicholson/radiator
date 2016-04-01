@@ -40,7 +40,8 @@ class Source
   property :id, Serial
   property :name, String
   property :href, URI
-  property :frequency,  Integer
+  property :frequency,  Integer, :default => 1
+  property :format, String
   has n, :views, :through => Resource
   def current_data
     JSON.parse(open(href).read)
@@ -62,8 +63,23 @@ class View
   has n, :sources , :through => Resource
 
   def jobs
-    all_jobs = sources.collect {|s| s.current_data['jobs']}.flatten
-    all_jobs.select {|job| filters.any? {|filter| filter.match(job['color'])}}
+    all_jobs = []
+    travis_status_map = {0 => 'blue', 1=> 'red', 'nil' => 'disabled'} 
+    sources.each do |s|
+      if s.format == 'Travis'
+        jobs = s.current_data.first
+        jobs['name'] = s.name
+
+        jobs['url'] = 'file:///foo.bar'
+        jobs['color'] = travis_status_map[jobs['result']]
+        all_jobs << [jobs]
+      else
+        all_jobs << s.current_data['jobs'].flatten
+      end
+    end
+    puts all_jobs.inspect
+    all_jobs.flatten.select {|job| filters.any? {|filter| filter.match(job['color'])}}
+    #all_jobs
   end
 
   def filters

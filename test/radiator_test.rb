@@ -35,7 +35,7 @@ class RadiatorTest <  Test::Unit::TestCase
     get '/views',{}
     assert last_response.ok?
     parsing(last_response.body) do |html|
-      assert_equal(2,html.css('div.job').length,'should have two jobs')
+      assert_equal(3,html.css('div.job').length,'should have three jobs')
       assert(html.css('div.job.red').text =~ /failjob/, 'failjob should render red')
       assert(html.css('div.job.blue').text =~ /goodjob/, 'goodjob should render blue')
     end
@@ -45,7 +45,7 @@ class RadiatorTest <  Test::Unit::TestCase
     get '/configure', {}
     assert last_response.ok?
     parsing(last_response.body) do |html|
-      assert_equal(2,html.css('#sources input').length,'Should have two view')
+      assert_equal(3,html.css('#sources input').length,'Should have Three views')
     end
   end
 
@@ -86,12 +86,12 @@ class RadiatorTest <  Test::Unit::TestCase
   end
 
   def test_view_jobs
-    assert @client.view.jobs.length == 2
+    assert @client.view.jobs.length == 3
   end
 
   def test_view_jobs_filter_add
     @client.view.filter_unstable = true
-    assert @client.view.jobs.length == 3
+    assert_equal(4,@client.view.jobs.length, "Client view should have 4 jobs")
   end
 
   def client_for_tests
@@ -100,14 +100,19 @@ class RadiatorTest <  Test::Unit::TestCase
           {"color"=>"yellow", "url"=>"http://localhost:8080/job/unstablejob/", "name"=>"unstablejob"}
           ]}))
     FakeWeb.register_uri(:get, "http://127.0.0.1:9998/bar", :body => JSON::dump({"jobs"=>[{"color"=>"blue", "url"=>"http://localhost:8080/job/goodjob/", "name"=>"goodjob"}]}))
+    FakeWeb.register_uri(:get, "http://127.0.0.1:9997/travis", :body => JSON::dump([{"id"=>120098789, "repository_id"=>494628, "number"=>"27", "state"=>"finished", "result"=>0, "started_at"=>"2016-04-01T15:44:51Z", "finished_at"=>"2016-04-01T15:46:38Z", "duration"=>189, "commit"=>"8f671b5dd0206961b2816795ed5307c62a039c28", "branch"=>"master", "message"=>"Clean up compass", "event_type"=>"push"}]))
+
+
     client = Client.create(:location => 'test')
     client.ip = '127.0.0.1'
     client.save!
-    source1 = Source.create(:name => 'test', :href=> 'http://127.0.0.1:9999/foo', :frequency => 1)
-    source2 = Source.create(:name => 'test2', :href=> 'http://127.0.0.1:9998/bar',:frequency => 1)
+    source1 = Source.create(:name => 'test', :href=> 'http://127.0.0.1:9999/foo', :frequency => 1, :format => 'Jenkins')
+    source2 = Source.create(:name => 'test2', :href=> 'http://127.0.0.1:9998/bar',:frequency => 1, :format => 'Jenkins')
+    source3 = Source.create(:name => 'travis test', :href => 'http://127.0.0.1:9997/travis',:frequency => 1, :format => 'Travis')
     view = View.create(:title => 'A view')
     view.sources << source1
     view.sources << source2
+    view.sources << source3
     view.filter_failed = true
     view.filter_succeeded = true
     view.save!
