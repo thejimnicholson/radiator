@@ -3,5 +3,4 @@ rvm:
   - "2.0.0"
   - "2.3.0"
 script:
-  - compass compile
-  - bundle exec ruby radiator_test.rb
+  - rake

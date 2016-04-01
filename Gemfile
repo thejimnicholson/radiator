@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem 'rake'
 gem 'compass'
 gem 'sinatra', :require => 'sinatra/base', git: 'https://github.com/juanpastas/sinatra.git'
 gem 'sinatra-contrib', :require => ['sinatra/json', 'sinatra/content_for','sinatra/reloader'], git: 'https://github.com/sinatra/sinatra-contrib.git' 
