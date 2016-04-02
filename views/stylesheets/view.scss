@@ -47,8 +47,20 @@ div#main {
 				}
 			}
 		}
-		div.job.red p a, div.job.aborted p a {
-					color: red;
+		div.job.red p {
+			background-color: #FF8080;
+			border-radius: 5px;
+			padding: 3px;
+			border: 2px solid red;
+			a {
+			  color: #FFFFFF;
+			}
+		}
+		div.job.yellow p {
+			background-color: #FFFF80;
+			border-radius: 5px;
+			padding: 3px;
+			border: 2px solid yellow;
 		}
 		div.job.grey p a, div.job.disabled p a {
 					color: gray;
