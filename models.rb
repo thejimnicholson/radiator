@@ -8,6 +8,8 @@ class Client
   property :location, String
   has 1, :view
 
+  
+
   def lookup_host(name)
     return self.host unless host.nil?
     unless name.nil?
@@ -40,12 +42,46 @@ class Source
   property :id, Serial
   property :name, String
   property :href, URI
-  property :frequency,  Integer, :default => 1
+  property :frequency,  Integer, :default => 60
   property :format, String
+
+  attr_accessor :data
+  attr_accessor :last_poll
+
   has n, :views, :through => Resource
-  def current_data
-    JSON.parse(open(href).read)
+
+  def raw_data
+    if @data.nil? || @last_poll.nil? || (@last_poll + frequency) < Time.now
+      @last_poll = Time.now
+      @data = open(href).read
+    end
+    return @data
   end
+
+
+  def current_data
+    JSON.parse(raw_data)
+  end
+
+  def parsed_data
+     travis_status_map = {0 => 'blue', 1=> 'red', 'nil' => 'disabled'} 
+    case format
+    when "Jenkins"
+      return current_data['jobs'].flatten
+      exit
+    when "Travis"
+      jobs = current_data.first
+      jobs['name'] = name
+      
+      jobs['url'] = href.to_s.gsub(/https:\/\/api.travis-ci.org\/repos/,"https://travis-ci.org") + "/" + current_data.first['id'].to_s
+      jobs['color'] = travis_status_map[jobs['result']]
+      return [jobs]
+    when "Jenkins 2.0"
+      jobs = current_data['jobs'].collect {|j| j['jobs']}.flatten
+    else
+      jobs = []
+    end
+ end
 
 end
 
@@ -64,20 +100,9 @@ class View
 
   def jobs
     all_jobs = []
-    travis_status_map = {0 => 'blue', 1=> 'red', 'nil' => 'disabled'} 
     sources.each do |s|
-      if s.format == 'Travis'
-        jobs = s.current_data.first
-        jobs['name'] = s.name
-
-        jobs['url'] = 'file:///foo.bar'
-        jobs['color'] = travis_status_map[jobs['result']]
-        all_jobs << [jobs]
-      else
-        all_jobs << s.current_data['jobs'].flatten
-      end
+      all_jobs << s.parsed_data.flatten
     end
-    puts all_jobs.inspect
     all_jobs.flatten.select {|job| filters.any? {|filter| filter.match(job['color'])}}
     #all_jobs
   end

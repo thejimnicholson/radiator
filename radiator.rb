@@ -14,11 +14,13 @@ class Radiator < Sinatra::Base
     puts 'Test configuration in use'
     DataMapper.setup(:default, "sqlite3::memory:")
     DataMapper.auto_migrate!
+    enable :logging
   end
 
   configure :development do 
     puts 'Development configuration in use'
     register Sinatra::Reloader
+    enable :logging
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
     DataMapper.auto_upgrade!
   end
