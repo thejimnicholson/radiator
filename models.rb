@@ -11,17 +11,17 @@ class Client
   
 
   def lookup_host(name)
-    return self.host unless host.nil?
+    return host unless host.nil?
     unless name.nil?
-       self.host = name
-       return self.host
+       host = name
+       return host
      end
     begin
-      self.host = Resolv.new.getname(ip.to_s)
+      host = Resolv.new.getname(ip.to_s)
     rescue Resolv::ResolvError
-      self.host = nil
+      host = nil
     end
-    self.host
+    host
   end
 
 
@@ -45,8 +45,8 @@ class Source
   property :frequency,  Integer, :default => 60
   property :format, String
 
-  attr_accessor :data
-  attr_accessor :last_poll
+  attr_reader :data
+  attr_reader :last_poll
 
   has n, :views, :through => Resource
 

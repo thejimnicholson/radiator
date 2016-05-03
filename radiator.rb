@@ -3,10 +3,11 @@ require 'rubygems'
 require 'bundler'
 Bundler.require(:default,(ENV['RACK_ENV']||'development').to_sym)
 
+# Base controllers for the radiator web UI
 class Radiator < Sinatra::Base
+
   helpers Sinatra::ContentFor
   register Sinatra::StaticAssets
-
 
   require './models.rb'
 
@@ -34,14 +35,26 @@ class Radiator < Sinatra::Base
   helpers do
 
     def checkbox_helper(id,css,value,text)
-      haml_tag :input, :type => 'checkbox', :checked => value, :class => css, :name => %Q(#{css}[]), :id => id, :value => id
+      haml_tag :input, 
+         :type => 'checkbox', 
+         :checked => value, 
+         :class => css, 
+         :name => %Q(#{css}[]), 
+         :id => id, 
+         :value => id
       haml_tag :label, text, :for => id
     end
-
+# todo: Refactor helpers 
     def source_selection(values, selected)
-      values.collect do |v|
-        haml_tag :input, :type => 'checkbox', :checked => (selected.collect {|s| s.id}.include? v.id), :class => 'source_list', :name => "source[]", :id => "source_#{v.id}", :value => v.id
-        haml_tag :label, v.name, :for => "source_#{v.id}"
+      values.collect do |value|
+        haml_tag :input, 
+           :type => 'checkbox', 
+           :checked => (selected.collect {|source| source.id}.include? value.id), 
+           :class => 'source_list', 
+           :name => "source[]", 
+           :id => "source_#{value.id}", 
+           :value => value.id
+        haml_tag :label, value.name, :for => "source_#{value.id}"
       end
     end
 
@@ -79,8 +92,8 @@ class Radiator < Sinatra::Base
       @client.view.sources << Source.get(sid)
     end
     @client.view.reset_filters
-    params['filter'].each do |f|
-      @client.view.send(%Q(#{f}=).to_sym,true)
+    params['filter'].each do |filter|
+      @client.view.send(%Q(#{filter}=).to_sym,true)
     end
     @client.view.save!
     redirect '/',303

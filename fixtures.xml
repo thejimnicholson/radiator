@@ -1,0 +1,23 @@
+<sources>
+  <source>
+    <id type='integer'>2</id>
+    <name>jenkins-ci.org</name>
+    <href>https://ci.jenkins-ci.org/api/json?depth=1</href>
+    <frequency type='integer'>1</frequency>
+    <format>Jenkins 2.0</format>
+  </source>
+  <source>
+    <id type='integer'>5</id>
+    <name>local jenkins</name>
+    <href>http://127.0.0.1:8080/api/json?tree=jobs[name,url,color]</href>
+    <frequency type='integer'>1</frequency>
+    <format>Jenkins</format>
+  </source>
+  <source>
+    <id type='integer'>7</id>
+    <name>Radiator on travis/ci</name>
+    <href>https://api.travis-ci.org/repos/thejimnicholson/radiator/builds</href>
+    <frequency type='integer'>1</frequency>
+    <format>Travis</format>
+  </source>
+</sources>
