@@ -24,6 +24,7 @@ class Radiator < Sinatra::Base
     enable :logging
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
     DataMapper.auto_upgrade!
+    load './bootstrap.rb'
   end
 
   configure do

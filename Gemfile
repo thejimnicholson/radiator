@@ -10,6 +10,7 @@ gem 'haml'
 gem 'json'
 #
 gem 'dm-sqlite-adapter'
+gem 'dm-serializer'
 gem 'data_mapper'
 gem 'nokogiri', :require => 'nokogiri'
 #
